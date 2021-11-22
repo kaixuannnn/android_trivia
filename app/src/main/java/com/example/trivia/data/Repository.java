@@ -22,7 +22,12 @@ public class Repository {
                 url, null, response -> {
             for (int i = 0; i < response.length(); i++) {
                 try {
-                    Log.d("Repo", "onCreate: "+ response.getJSONArray(i).get(0));
+                    Question question = new Question(response.getJSONArray(i).get(0).toString(),response.getJSONArray(i).getBoolean(1));
+                    //Add questions to arraylist/list
+                    questionArrayList.add(question);
+
+
+//                    Log.d("hello", "getQuestions: "+ questionArrayList);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -34,7 +39,7 @@ public class Repository {
         AppController.getInstance().addToRequestQueue(jsonArrayRequest);
 
 
-        return null;
+        return questionArrayList;
     }
 
 }
